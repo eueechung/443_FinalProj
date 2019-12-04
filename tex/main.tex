@@ -1,0 +1,88 @@
+\documentclass[sigconf]{acmart}
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+\usepackage{listings}
+
+\lstset{frame=none,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+}
+
+\settopmatter{printacmref=false}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Quadratic Assignment Problem \\
+    \large A Permutation-Encoded Evolutionary Algorithm Using Ant Colony Optimization
+}
+
+\author{Abdulrahman Al-Sharabati}
+\email{aalsharabati@stcloudstate.edu}
+\affiliation{
+  \institution{Saint Cloud State University}
+}
+
+\author{Barrett Carlson}
+\email{bwcarlson@stcloudstate.edu}
+\affiliation{
+  \institution{Saint Cloud State University}
+}
+
+\author{Eu Ee Chung}
+\email{echung@stcloudstate.edu}
+\affiliation{
+  \institution{Saint Cloud State University}
+}
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+\section {Introduction}
+
+\subsection {The Quadratic Assignment Problem}
+The quadratic assignment problem (QAP) is a graph optimization problem that is NP-hard. The premise of the problem is that there are two complete weighted graphs, \verb|u| and \verb|v|, each with \verb|n| vertices. An example of two complete graphs is shown in Figure ~\ref{fig:tcwgf}. Then, the next step of the problem is to identify a bijection from graph \verb|U| to graph \verb|V|. A bijection is a mathematical function where each element in one set is paired with exactly one element in the second set, and vice versa. In this setting, this means that every vertex in graph \verb|U| is connected to only one vertex in graph \verb|V|, and vice versa. However, when \verb|n| is larger than 1, there are multiple possible bijections. The number of possible bijections between two complete graphs with n vertices each is \verb|n!| (\verb|n| factorial), which means its growth rate is faster than exponential. Two such possible bijections for the graphs in Figure ~\ref{fig:tcwgf} are shown in Figure ~\ref{fig:tcwg_bij}. What differentiates one bijection from the next is the cost function that evaluates the bijection and determines how "good" the bijection is. The value of any one bijection is the summation of all edge weights in graph \verb|U| multiplied by their mapped edge weights in graph \verb|V|. The goal of the QAP is to find a bijection that has the smallest value.
+
+One example use case of this problem, taken straight from Wikipedia, is mapping facilities to locations. Imagine graph \verb|U| as a graph of facilities with the edge weights representing the amount of product being transferred between each facility, called "flow". Graph \verb|V|, on the other hand, is a graph of locations that facilities in graph \verb|U| can be placed, with the edge weights representing the distance between each location. A bijection, then, is any single mapping of facilities to locations. The goal would be to find the bijection that allows us to transport the most product over the least distance, and that is where the cost function comes in. The cost function multiplies the flow between two facilities by the distance between the two facilities.
+
+\begin {figure}
+	%\includegraphics {width=0.9\textwidth{tcwg.png}
+	\includegraphics [width=0.5\textwidth] {placeholder.png}
+	\caption {Two complete weighted graphs with magnitude 5. Lord Cthulhu has started rejecting our summons for aid and we are growing increasingly desperate.}
+	\label{fig:tcwgf}
+\end {figure}
+
+\begin {figure}
+	%\includegraphics {width=0.9\textwidth{twobijections.png}
+	\includegraphics [width=0.5\textwidth] {placeholder.png}
+	\caption {Two possible bijections for the graphs shown in Figure ~\ref{fig:tcwgf}.}
+	\label{fig:tcwg_bij}
+\end {figure}
+
+\section {Methods}
+A single bijection can be represented by an array as a permutation. By using the index of the element as the source vertex in graph \verb|U|, the value that the element contains can be the vertex in graph \verb|V| that it is paired with.
+
+\section {Results}
+
+\section {Discussion}
+
+\section {Conclusion}
+
+\section {Acknowledgments}
+We would like to thank Dr. Bryant Julstrom and Sam Thompson for their assistance in this work.
+
+\bibliographystyle{acm}
+\bibliography{evo-comp}{}
+
+\end{document}
+\endinput
