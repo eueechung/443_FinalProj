@@ -1,8 +1,28 @@
 #include "aco.hpp"
 
 //one ant at each starting vertex
-//each starting vertex has a pheromone that indicates its quality as a starting vertex
-//the amount of pheromone applied to each edge is also the same amount of pheromone applied to the start vertex
 
 int main() {
+	//Init pheromones
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j <= i; j++) {
+			pheromones[i][j] = pheromone[j][i] = 0;
+		}
+	}
+	
+	//Init ants
+	for (int i = 0; i < n; i++) {
+		ant[i] = Ant(i);
+	}
+
+	while () {
+		for (int i = 0; i < n; i++) {
+			ant[i].traverse();
+		}
+		//Decay trail
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+			}
+		}
+	}
 }

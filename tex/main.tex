@@ -57,6 +57,8 @@ The quadratic assignment problem (QAP) is a graph optimization problem that is N
 
 One example use case of this problem, taken straight from Wikipedia, is mapping facilities to locations. Imagine graph \verb|U| as a graph of facilities with the edge weights representing the amount of product being transferred between each facility, called "flow". Graph \verb|V|, on the other hand, is a graph of locations that facilities in graph \verb|U| can be placed, with the edge weights representing the distance between each location. A bijection, then, is any single mapping of facilities to locations. The goal would be to find the bijection that allows us to transport the most product over the least distance, and that is where the cost function comes in. The cost function multiplies the flow between two facilities by the distance between the two facilities.
 
+\subsection {Ant Colony Optimization}
+
 \begin {figure}
 \centering
 \begin{subfigure}{.5\columnwidth}
