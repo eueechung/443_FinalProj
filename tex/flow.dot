@@ -1,0 +1,18 @@
+graph K5 {
+	layout=circo;
+	graph [ dpi = 300 ];
+	rankdir=BT;
+	node[shape=point, color=red, xlabel="\N", fontsize=6, fontcolor=purple];
+	edge[fontsize=4, fontcolor=blue];
+	a--b[label="7"];
+	a--c[label="12"];
+	a--d[label="22"];
+	a--e[label="14"];
+	b--c[label="21"];
+	b--d[label="24"];
+	b--e[label="11"];
+	c--d[label="16"];
+	c--e[label="5"];
+	d--e[label="10"];
+}
+

@@ -2,14 +2,16 @@
 \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
 \pagestyle{plain} % removes running headers
 \usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \lstset{frame=none,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  breaklines=true,
-  breakatwhitespace=true,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+breaklines=true,
+breakatwhitespace=true,
 }
 
 \settopmatter{printacmref=false}
@@ -22,25 +24,25 @@
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
 \title{Quadratic Assignment Problem \\
-    \large A Permutation-Encoded Evolutionary Algorithm Using Ant Colony Optimization
+\large A Permutation-Encoded Evolutionary Algorithm Using Ant Colony Optimization
 }
 
 \author{Abdulrahman Al-Sharabati}
 \email{aalsharabati@stcloudstate.edu}
 \affiliation{
-  \institution{Saint Cloud State University}
+	\institution{Saint Cloud State University}
 }
 
 \author{Barrett Carlson}
 \email{bwcarlson@stcloudstate.edu}
 \affiliation{
-  \institution{Saint Cloud State University}
+	\institution{Saint Cloud State University}
 }
 
 \author{Eu Ee Chung}
 \email{echung@stcloudstate.edu}
 \affiliation{
-  \institution{Saint Cloud State University}
+	\institution{Saint Cloud State University}
 }
 
 \begin{abstract}
@@ -51,26 +53,68 @@
 \section {Introduction}
 
 \subsection {The Quadratic Assignment Problem}
-The quadratic assignment problem (QAP) is a graph optimization problem that is NP-hard. The premise of the problem is that there are two complete weighted graphs, \verb|u| and \verb|v|, each with \verb|n| vertices. An example of two complete graphs is shown in Figure ~\ref{fig:tcwgf}. Then, the next step of the problem is to identify a bijection from graph \verb|U| to graph \verb|V|. A bijection is a mathematical function where each element in one set is paired with exactly one element in the second set, and vice versa. In this setting, this means that every vertex in graph \verb|U| is connected to only one vertex in graph \verb|V|, and vice versa. However, when \verb|n| is larger than 1, there are multiple possible bijections. The number of possible bijections between two complete graphs with n vertices each is \verb|n!| (\verb|n| factorial), which means its growth rate is faster than exponential. Two such possible bijections for the graphs in Figure ~\ref{fig:tcwgf} are shown in Figure ~\ref{fig:tcwg_bij}. What differentiates one bijection from the next is the cost function that evaluates the bijection and determines how "good" the bijection is. The value of any one bijection is the summation of all edge weights in graph \verb|U| multiplied by their mapped edge weights in graph \verb|V|. The goal of the QAP is to find a bijection that has the smallest value.
+The quadratic assignment problem (QAP) is a graph optimization problem that is NP-hard. The premise of the problem is that there are two complete weighted graphs, \verb|u| and \verb|v|, each with \verb|n| vertices. An example of two complete graphs is shown in Figure ~\ref{fig:k5}. Then, the next step of the problem is to identify a bijection from graph \verb|U| to graph \verb|V|. A bijection is a mathematical function where each element in one set is paired with exactly one element in the second set, and vice versa. In this setting, this means that every vertex in graph \verb|U| is connected to only one vertex in graph \verb|V|, and vice versa. However, when \verb|n| is larger than 1, there are multiple possible bijections. The number of possible bijections between two complete graphs with n vertices each is \verb|n!| (\verb|n| factorial), which means its growth rate is faster than exponential. Two such possible bijections for the graphs in Figure ~\ref{fig:k5} are shown in Figure ~\ref{fig:bij}. What differentiates one bijection from the next is the cost function that evaluates the bijection and determines how "good" the bijection is. The value of any one bijection is the summation of all edge weights in graph \verb|U| multiplied by their mapped edge weights in graph \verb|V|. The goal of the QAP is to find a bijection that has the lowest possible value.
 
 One example use case of this problem, taken straight from Wikipedia, is mapping facilities to locations. Imagine graph \verb|U| as a graph of facilities with the edge weights representing the amount of product being transferred between each facility, called "flow". Graph \verb|V|, on the other hand, is a graph of locations that facilities in graph \verb|U| can be placed, with the edge weights representing the distance between each location. A bijection, then, is any single mapping of facilities to locations. The goal would be to find the bijection that allows us to transport the most product over the least distance, and that is where the cost function comes in. The cost function multiplies the flow between two facilities by the distance between the two facilities.
 
 \begin {figure}
-	%\includegraphics {width=0.9\textwidth{tcwg.png}
-	\includegraphics [width=0.5\textwidth] {placeholder.png}
-	\caption {Two complete weighted graphs with magnitude 5. Lord Cthulhu has started rejecting our summons for aid and we are growing increasingly desperate.}
-	\label{fig:tcwgf}
+\centering
+\begin{subfigure}{.5\columnwidth}
+	\centering
+	\includegraphics[width=1\columnwidth]{flow.png}
+	\caption{The flow graph in the QAP.}
+	\label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\columnwidth}
+	\centering
+	\includegraphics[width=1\columnwidth]{distance.png}
+	\caption{The distance graph in the QAP.}
+	\label{fig:sub2}
+\end{subfigure}
+\caption {Two complete weighted graphs with magnitude 5. Lord Cthulhu has started rejecting our summons for aid and we are growing increasingly desperate.}
+\label{fig:k5}
 \end {figure}
 
 \begin {figure}
-	%\includegraphics {width=0.9\textwidth{twobijections.png}
-	\includegraphics [width=0.5\textwidth] {placeholder.png}
-	\caption {Two possible bijections for the graphs shown in Figure ~\ref{fig:tcwgf}.}
-	\label{fig:tcwg_bij}
+\centering
+\begin{subfigure}{.5\columnwidth}
+	\centering
+	\includegraphics[width=1\columnwidth]{bij1.png}
+	\caption{}
+	\label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\columnwidth}
+	\centering
+	\includegraphics[width=1\columnwidth]{bij2.png}
+	\caption{}
+	\label{fig:sub2}
+\end{subfigure}
+\caption {Two possible bijections for for the graphs shown in Figure ~\ref{fig:k5}. There are 120 total possible bijections for a graph of 5 vertices.}
+\label{fig:bij}
+\end {figure}
+
+\begin {figure}
+\centering
+\begin{subfigure}{.5\columnwidth}
+	\centering
+	\includegraphics[width=1\columnwidth]{qap1.png}
+	\caption{Fitness = 2003}
+	\label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\columnwidth}
+	\centering
+	\includegraphics[width=1\columnwidth]{qap2.png}
+	\caption{Fitness = 1952}
+	\label{fig:sub2}
+\end{subfigure}
+\caption {The graph mappings that result from the bijections in Figure ~\ref{fig:bij}. Lower is better, so the second bijection is better.}
+\label{fig:qap}
 \end {figure}
 
 \section {Methods}
 A single bijection can be represented by an array as a permutation. By using the index of the element as the source vertex in graph \verb|U|, the value that the element contains can be the vertex in graph \verb|V| that it is paired with.
+
+We use a 2-dimensional \verb|n|x\verb|n| array. The first dimension would be the vertex in the flow graph and the second would be the distance graph vertex that it should map to. The array is simply the pheromone lookup table which reveals which distance graph vertices that the ants chose given the chosen flow graph vertex.
 
 \section {Results}
 

@@ -1,0 +1,20 @@
+digraph bij1 {
+	rankdir=LR;
+	graph [ dpi = 300 ];
+	subgraph cluster1 {
+		label="Flow";
+		graph[style=dotted];
+		a; b; c; d; e;
+	}
+	subgraph cluster2 {
+		label="Distance";
+		graph[style=dotted];
+		u; v; x; y; z;
+	}
+	a -> u;
+	b -> v;
+	c -> x;
+	d -> y;
+	e -> z;
+}
+

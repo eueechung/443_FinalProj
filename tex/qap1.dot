@@ -1,0 +1,24 @@
+graph QAP {
+	layout=circo;
+	graph [ dpi = 300 ];
+	rankdir=BT;
+	node[shape=point, color=red, fontsize=6, fontcolor=purple];
+	edge[fontsize=4, fontcolor=blue];
+
+	au [xlabel="a,u"];
+	bv [xlabel="b,v"];
+	cx [xlabel="c,x"];
+	dy [xlabel="d,y"];
+	ez [xlabel="e,z"];
+
+	au -- bv[label="7*5"];
+	au -- cx[label="12*13"];
+	au -- dy[label="22*16"];
+	au -- ez[label="14*17"];
+	bv -- cx[label="21*9"];
+	bv -- dy[label="24*19"];
+	bv -- ez[label="11*6"];
+	cx -- dy[label="16*21"];
+	cx -- ez[label="5*15"];
+	dy -- ez[label="10*10"];
+}
