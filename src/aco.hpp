@@ -1,13 +1,18 @@
 
-int flow[][];
-int dist[][];
+int flow[n][n];
+int dist[n][n];
 
-float pheromones[][];
+float pheromones[n][n];
+float pheromone_t[n];
 float decay;
 
 int select(int vert_f) {
-	int max = 0, vert_d;
-	int temp = rand() % n;
+	int temp = rand() % pheromone_t[vert_f];
+	for (int i = 0; temp > 0;i++) {
+		if (!visited[i]) {
+			temp -= pheromones[vert_f][i];
+		}
+	}
 	return vert_d;
 }
 

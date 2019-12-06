@@ -116,7 +116,9 @@ One example use case of this problem, taken straight from Wikipedia, is mapping 
 \section {Methods}
 A single bijection can be represented by an array as a permutation. By using the index of the element as the source vertex in graph \verb|U|, the value that the element contains can be the vertex in graph \verb|V| that it is paired with.
 
-We use a 2-dimensional \verb|n|x\verb|n| array. The first dimension would be the vertex in the flow graph and the second would be the distance graph vertex that it should map to. The array is simply the pheromone lookup table which reveals which distance graph vertices that the ants chose given the chosen flow graph vertex.
+We use a \verb|n|x\verb|n| matrix to track the pheromones for each possible vertex pairing/mapping. The first dimension would be the vertex in the graph \verb|U| and the second would be the vertex in graph \verb|V| that it should map to. The array is simply the pheromone lookup table which reveals which graph \verb|U| vertices that the ants normally choose given the chosen flow graph vertex.
+
+To choose a vertex to map to, we keep track of the total amount of pheromone on the vertex, choose a random value within the range {0,\verb|pheromone_total|}. We then iterate over the possible mappings and subtract the vertex's pheromone amount from the random value until the random value is less than or equal to zero. The mapping that reduces the random value to a nonpositive integer is chosen. The whole operation is \verb|O(n)|, however, it is done every time we look for a vertex to map to.
 
 \section {Results}
 
